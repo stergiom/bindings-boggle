@@ -35,21 +35,18 @@ class Main < JRubyFX::Application
     ## -
     # some_label.text_property.bind(Bindings.select_string(all_items.get_selection_model.selected_item_property, "blurp"))
 
-    # - This works..
-    # -
-    all_items.get_selection_model.selected_item_property.add_listener(
-      ->(_, _, nw) { some_label.text = "heading: #{nw.heading} (value: #{nw.value})" }
-    )
-
-    ## - Trying with Enebo's RubyPropertyBinding suggestion, a level seems to be missing at the reload_value method
-    ## - https://gist.github.com/enebo/e991ee9d54fd24f69127443388b440ee
-    ## -
-    # some_label.text_property.bind(
-    #   RubyPropertyBinding.new(
-    #     property: all_items.get_selection_model.selected_item_property,
-    #     method: "blurp"
-    #   )
+    # # - This works..
+    # # -
+    # all_items.get_selection_model.selected_item_property.add_listener(
+    #   ->(_, _, nw) { some_label.text = "heading: #{nw.heading} (value: #{nw.value})" }
     # )
+
+    # - Trying with Enebo's RubyPropertyBinding suggestion, a level seems to be missing at the reload_value method
+    # - https://gist.github.com/enebo/e991ee9d54fd24f69127443388b440ee
+    # -
+    some_label.text_property.bind(
+      RubyPropertyBinding.new(property: all_items.get_selection_model.selected_item_property, method: "blurp")
+    )
 
     stage.scene = Scene.new(root)
     stage.title = "Hello Universe"
