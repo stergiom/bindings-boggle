@@ -1,4 +1,5 @@
 require 'set'
+require "pry"
 
 # Note: I added @valid as explcit boolean because method may return nil as
 # valid value so I cannot overload @value.
@@ -44,6 +45,7 @@ class RubyPropertyBinding
   end
 
   def reload_value
-    @value = @property.__send__ @method
+    return unless @property.get
+    @value = @property.get.__send__ @method
   end
 end

@@ -1,4 +1,5 @@
 require "jrubyfx"
+require "pry"
 
 java_import "javafx.scene.control.TreeItem"
 
